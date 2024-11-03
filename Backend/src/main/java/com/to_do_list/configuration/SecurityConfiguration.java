@@ -28,6 +28,7 @@ public class SecurityConfiguration {
         http.csrf().disable().headers().frameOptions().disable().and()
                 .authorizeHttpRequests()
                 .requestMatchers("/h2-console/**").permitAll()
+                .requestMatchers("/auth/login","/auth/register").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .sessionManagement()

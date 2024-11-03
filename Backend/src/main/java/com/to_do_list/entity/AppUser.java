@@ -1,7 +1,9 @@
 package com.to_do_list.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -13,6 +15,7 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
+@NoArgsConstructor
 @Table(name = "app_user")
 public class AppUser implements UserDetails {
 
@@ -28,6 +31,11 @@ public class AppUser implements UserDetails {
     @JoinColumn(name = "user_role")
     private AppRole appRole;
 
+    public AppUser(String email, String password, AppRole appRole) {
+        this.email = email;
+        this.password = password;
+        this.appRole = appRole;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
