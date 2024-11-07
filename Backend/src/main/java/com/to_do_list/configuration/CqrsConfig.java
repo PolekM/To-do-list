@@ -2,6 +2,8 @@ package com.to_do_list.configuration;
 
 import com.to_do_list.components.CommandDispatcher;
 import com.to_do_list.components.QueryDispatcher;
+import com.to_do_list.cqrs.to_do_list.command.CreateListCommand;
+import com.to_do_list.cqrs.to_do_list.command.handler.CreateListCommandHandler;
 import com.to_do_list.cqrs.user.command.LoginCommand;
 import com.to_do_list.cqrs.user.command.RegisterCommand;
 import com.to_do_list.cqrs.user.command.handler.LoginCommandHandler;
@@ -17,21 +19,25 @@ public class CqrsConfig {
     private final QueryDispatcher queryDispatcher;
     private final LoginCommandHandler loginCommandHandler;
     private final RegisterCommandHandler registerCommandHandler;
+    private final CreateListCommandHandler createListCommandHandler;
 
     @Autowired
     public CqrsConfig(CommandDispatcher commandDispatcher,
                       QueryDispatcher queryDispatcher,
                       LoginCommandHandler loginCommandHandler,
-                      RegisterCommandHandler registerCommandHandler) {
+                      RegisterCommandHandler registerCommandHandler,
+                      CreateListCommandHandler createListCommandHandler) {
         this.commandDispatcher = commandDispatcher;
         this.queryDispatcher = queryDispatcher;
         this.loginCommandHandler = loginCommandHandler;
         this.registerCommandHandler = registerCommandHandler;
+        this.createListCommandHandler = createListCommandHandler;
     }
 
     @PostConstruct
     public void registerHandlers(){
         commandDispatcher.registerHandler(LoginCommand.class, loginCommandHandler);
         commandDispatcher.registerHandler(RegisterCommand.class, registerCommandHandler);
+        commandDispatcher.registerHandler(CreateListCommand.class, createListCommandHandler);
     }
 }
