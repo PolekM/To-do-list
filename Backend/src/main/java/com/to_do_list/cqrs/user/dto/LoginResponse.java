@@ -1,4 +1,4 @@
-package com.to_do_list.Dto;
+package com.to_do_list.cqrs.user.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

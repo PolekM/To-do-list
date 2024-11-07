@@ -1,6 +1,6 @@
 package com.to_do_list.configuration;
 
-import com.to_do_list.service.imp.JwtService;
+import com.to_do_list.jwt.JwtService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
