@@ -20,6 +20,7 @@ public class ToDoList {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
     Integer id;
+    @Column(nullable = false)
     String name;
     @ManyToOne
     @JoinColumn(name = "user_id")
