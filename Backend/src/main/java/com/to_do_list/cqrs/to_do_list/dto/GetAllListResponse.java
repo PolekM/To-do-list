@@ -1,18 +1,20 @@
 package com.to_do_list.cqrs.to_do_list.dto;
 
 import com.to_do_list.entity.ToDoList;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class ToDoListCreateResponse {
+public class GetAllListResponse {
 
-    private Integer id;
-    private String name;
+    Integer id;
+    String name;
 
-    public ToDoListCreateResponse(ToDoList toDoList){
-        this.id = toDoList.getId();
+    public GetAllListResponse(ToDoList toDoList) {
+        this.id =toDoList.getId();
         this.name = toDoList.getName();
     }
+
 }
