@@ -6,6 +6,8 @@ import com.to_do_list.cqrs.to_do_list.command.CreateListCommand;
 import com.to_do_list.cqrs.to_do_list.dto.CreateListDto;
 import com.to_do_list.cqrs.to_do_list.dto.CreateListResponse;
 import com.to_do_list.cqrs.to_do_list.dto.GetAllListResponse;
+import com.to_do_list.cqrs.to_do_list.dto.GetListByIdResponse;
+import com.to_do_list.cqrs.to_do_list.query.GetListByIdQuery;
 import com.to_do_list.cqrs.to_do_list.query.GetListQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -38,4 +40,10 @@ public class ToDoListController {
         return queryDispatcher.dispatch(getListQuery);
    }
 
+   @GetMapping("{id}")
+    public GetListByIdResponse getListById(@PathVariable Integer id) {
+        GetListByIdQuery getListByIdQuery = new GetListByIdQuery(id);
+        return queryDispatcher.dispatch(getListByIdQuery);
+
+   }
 }
