@@ -1,5 +1,7 @@
 package com.to_do_list.entity;
 
+import com.to_do_list.cqrs.task.command.CreateTaskCommand;
+import com.to_do_list.cqrs.to_do_list.command.CreateListCommand;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,5 +22,11 @@ public class Task {
     @ManyToOne
     @JoinColumn(name = "list_id")
     ToDoList list;
+
+    public Task(String description,ToDoList list) {
+        this.list = list;
+        this.description = description;
+        this.isCompleted = false;
+    }
 
 }
