@@ -13,6 +13,7 @@ import com.to_do_list.repository.ToDoListRepository;
 import com.to_do_list.service.AppUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class DeleteTaskCommandHandler implements CommandHandler<DeleteTaskCommand,Void> {
@@ -28,6 +29,7 @@ public class DeleteTaskCommandHandler implements CommandHandler<DeleteTaskComman
         this.toDoListRepository = toDoListRepository;
     }
 
+    @Transactional
     @Override
     public Void handle(DeleteTaskCommand command) {
         Task task = taskRepository.findById(command.getId()).orElseThrow(() -> new TaskNotFoundException("Task not found"));
