@@ -3,8 +3,10 @@ package com.to_do_list.configuration;
 import com.to_do_list.components.CommandDispatcher;
 import com.to_do_list.components.QueryDispatcher;
 import com.to_do_list.cqrs.task.command.CreateTaskCommand;
+import com.to_do_list.cqrs.task.command.DeleteTaskCommand;
 import com.to_do_list.cqrs.task.command.UpdateTaskCommand;
 import com.to_do_list.cqrs.task.command.handler.CreateTaskCommandHandler;
+import com.to_do_list.cqrs.task.command.handler.DeleteTaskCommandHandler;
 import com.to_do_list.cqrs.task.command.handler.UpdateTaskCommandHandler;
 import com.to_do_list.cqrs.to_do_list.command.CreateListCommand;
 import com.to_do_list.cqrs.to_do_list.command.handler.CreateListCommandHandler;
@@ -32,6 +34,7 @@ public class CqrsConfig {
     private final GetListByIdQueryHandler getListByIdQueryHandler;
     private final CreateTaskCommandHandler createTaskCommandHandler;
     private final UpdateTaskCommandHandler updateTaskCommandHandler;
+    private final DeleteTaskCommandHandler deleteTaskCommandHandler;
 
     @Autowired
     public CqrsConfig(CommandDispatcher commandDispatcher,
@@ -42,7 +45,8 @@ public class CqrsConfig {
                       GetListQueryHandler getListQueryHandler,
                       GetListByIdQueryHandler getListByIdQueryHandler,
                       CreateTaskCommandHandler createTaskCommandHandler,
-                      UpdateTaskCommandHandler updateTaskCommandHandler) {
+                      UpdateTaskCommandHandler updateTaskCommandHandler,
+                      DeleteTaskCommandHandler deleteTaskCommandHandler) {
         this.commandDispatcher = commandDispatcher;
         this.queryDispatcher = queryDispatcher;
         this.loginCommandHandler = loginCommandHandler;
@@ -52,6 +56,7 @@ public class CqrsConfig {
         this.getListByIdQueryHandler = getListByIdQueryHandler;
         this.createTaskCommandHandler = createTaskCommandHandler;
         this.updateTaskCommandHandler = updateTaskCommandHandler;
+        this.deleteTaskCommandHandler = deleteTaskCommandHandler;
     }
 
     @PostConstruct
@@ -63,5 +68,6 @@ public class CqrsConfig {
         queryDispatcher.registerHandler(GetListByIdQuery.class,getListByIdQueryHandler);
         commandDispatcher.registerHandler(CreateTaskCommand.class, createTaskCommandHandler);
         commandDispatcher.registerHandler(UpdateTaskCommand.class, updateTaskCommandHandler);
+        commandDispatcher.registerHandler(DeleteTaskCommand.class, deleteTaskCommandHandler);
     }
 }

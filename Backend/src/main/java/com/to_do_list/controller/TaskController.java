@@ -3,6 +3,7 @@ package com.to_do_list.controller;
 import com.to_do_list.components.CommandDispatcher;
 import com.to_do_list.components.QueryDispatcher;
 import com.to_do_list.cqrs.task.command.CreateTaskCommand;
+import com.to_do_list.cqrs.task.command.DeleteTaskCommand;
 import com.to_do_list.cqrs.task.command.UpdateTaskCommand;
 import com.to_do_list.cqrs.task.dto.CreateTaskDto;
 import com.to_do_list.cqrs.task.dto.CreateTaskResponse;
@@ -33,5 +34,11 @@ public class TaskController {
     public CreateTaskResponse updateTask(@PathVariable("id") Integer id, @RequestBody UpdateTaskDto updateTaskDto){
         UpdateTaskCommand updateTaskCommand = new UpdateTaskCommand(id,updateTaskDto);
         return commandDispatcher.dispatch(updateTaskCommand);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public Void deleteTask(@PathVariable Integer id){
+        DeleteTaskCommand deleteTaskCommand = new DeleteTaskCommand(id);
+        return commandDispatcher.dispatch(deleteTaskCommand);
     }
 }
