@@ -3,7 +3,9 @@ package com.to_do_list.configuration;
 import com.to_do_list.components.CommandDispatcher;
 import com.to_do_list.components.QueryDispatcher;
 import com.to_do_list.cqrs.task.command.CreateTaskCommand;
+import com.to_do_list.cqrs.task.command.UpdateTaskCommand;
 import com.to_do_list.cqrs.task.command.handler.CreateTaskCommandHandler;
+import com.to_do_list.cqrs.task.command.handler.UpdateTaskCommandHandler;
 import com.to_do_list.cqrs.to_do_list.command.CreateListCommand;
 import com.to_do_list.cqrs.to_do_list.command.handler.CreateListCommandHandler;
 import com.to_do_list.cqrs.to_do_list.query.GetListByIdQuery;
@@ -29,6 +31,7 @@ public class CqrsConfig {
     private final GetListQueryHandler getListQueryHandler;
     private final GetListByIdQueryHandler getListByIdQueryHandler;
     private final CreateTaskCommandHandler createTaskCommandHandler;
+    private final UpdateTaskCommandHandler updateTaskCommandHandler;
 
     @Autowired
     public CqrsConfig(CommandDispatcher commandDispatcher,
@@ -38,7 +41,8 @@ public class CqrsConfig {
                       CreateListCommandHandler createListCommandHandler,
                       GetListQueryHandler getListQueryHandler,
                       GetListByIdQueryHandler getListByIdQueryHandler,
-                      CreateTaskCommandHandler createTaskCommandHandler) {
+                      CreateTaskCommandHandler createTaskCommandHandler,
+                      UpdateTaskCommandHandler updateTaskCommandHandler) {
         this.commandDispatcher = commandDispatcher;
         this.queryDispatcher = queryDispatcher;
         this.loginCommandHandler = loginCommandHandler;
@@ -47,6 +51,7 @@ public class CqrsConfig {
         this.getListQueryHandler = getListQueryHandler;
         this.getListByIdQueryHandler = getListByIdQueryHandler;
         this.createTaskCommandHandler = createTaskCommandHandler;
+        this.updateTaskCommandHandler = updateTaskCommandHandler;
     }
 
     @PostConstruct
@@ -57,5 +62,6 @@ public class CqrsConfig {
         queryDispatcher.registerHandler(GetListQuery.class,getListQueryHandler);
         queryDispatcher.registerHandler(GetListByIdQuery.class,getListByIdQueryHandler);
         commandDispatcher.registerHandler(CreateTaskCommand.class, createTaskCommandHandler);
+        commandDispatcher.registerHandler(UpdateTaskCommand.class, updateTaskCommandHandler);
     }
 }

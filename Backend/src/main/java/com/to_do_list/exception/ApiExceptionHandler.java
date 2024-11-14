@@ -2,6 +2,7 @@ package com.to_do_list.exception;
 
 import com.to_do_list.exception.List.CreateListIllegalArgumentException;
 import com.to_do_list.exception.List.ToDoListNotFoundException;
+import com.to_do_list.exception.Task.TaskNotFoundException;
 import com.to_do_list.exception.user.WrongCredentialException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,7 +29,7 @@ public class ApiExceptionHandler {
         return responseEntityExceptionBuilder(HttpStatus.BAD_REQUEST, e.getMessage());
     }
 
-    @ExceptionHandler({ToDoListNotFoundException.class})
+    @ExceptionHandler({ToDoListNotFoundException.class, TaskNotFoundException.class})
     public ResponseEntity<Error> handlerNotFoundException(Exception e) {
         return responseEntityExceptionBuilder(HttpStatus.NOT_FOUND, e.getMessage());
     }
