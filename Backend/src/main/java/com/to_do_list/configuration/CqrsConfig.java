@@ -10,8 +10,10 @@ import com.to_do_list.cqrs.task.command.handler.DeleteTaskCommandHandler;
 import com.to_do_list.cqrs.task.command.handler.UpdateTaskCommandHandler;
 import com.to_do_list.cqrs.to_do_list.command.CreateListCommand;
 import com.to_do_list.cqrs.to_do_list.command.DeleteListCommand;
+import com.to_do_list.cqrs.to_do_list.command.UpdateListCommand;
 import com.to_do_list.cqrs.to_do_list.command.handler.CreateListCommandHandler;
 import com.to_do_list.cqrs.to_do_list.command.handler.DeleteListCommandHandler;
+import com.to_do_list.cqrs.to_do_list.command.handler.UpdateListCommandHandler;
 import com.to_do_list.cqrs.to_do_list.query.GetListByIdQuery;
 import com.to_do_list.cqrs.to_do_list.query.GetListQuery;
 import com.to_do_list.cqrs.to_do_list.query.handler.GetListByIdQueryHandler;
@@ -38,6 +40,7 @@ public class CqrsConfig {
     private final UpdateTaskCommandHandler updateTaskCommandHandler;
     private final DeleteTaskCommandHandler deleteTaskCommandHandler;
     private final DeleteListCommandHandler deleteListCommandHandler;
+    private final UpdateListCommandHandler updateListCommandHandler;
 
     @Autowired
     public CqrsConfig(CommandDispatcher commandDispatcher,
@@ -50,7 +53,8 @@ public class CqrsConfig {
                       CreateTaskCommandHandler createTaskCommandHandler,
                       UpdateTaskCommandHandler updateTaskCommandHandler,
                       DeleteTaskCommandHandler deleteTaskCommandHandler,
-                      DeleteListCommandHandler deleteListCommandHandler) {
+                      DeleteListCommandHandler deleteListCommandHandler,
+                      UpdateListCommandHandler updateListCommandHandler) {
         this.commandDispatcher = commandDispatcher;
         this.queryDispatcher = queryDispatcher;
         this.loginCommandHandler = loginCommandHandler;
@@ -62,6 +66,7 @@ public class CqrsConfig {
         this.updateTaskCommandHandler = updateTaskCommandHandler;
         this.deleteTaskCommandHandler = deleteTaskCommandHandler;
         this.deleteListCommandHandler = deleteListCommandHandler;
+        this.updateListCommandHandler = updateListCommandHandler;
     }
 
     @PostConstruct
@@ -75,6 +80,7 @@ public class CqrsConfig {
         commandDispatcher.registerHandler(UpdateTaskCommand.class, updateTaskCommandHandler);
         commandDispatcher.registerHandler(DeleteTaskCommand.class, deleteTaskCommandHandler);
         commandDispatcher.registerHandler(DeleteListCommand.class, deleteListCommandHandler);
+        commandDispatcher.registerHandler(UpdateListCommand.class, updateListCommandHandler);
     }
 
 }

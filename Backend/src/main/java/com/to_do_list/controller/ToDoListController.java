@@ -2,12 +2,11 @@ package com.to_do_list.controller;
 
 import com.to_do_list.components.CommandDispatcher;
 import com.to_do_list.components.QueryDispatcher;
+import com.to_do_list.cqrs.task.command.UpdateTaskCommand;
 import com.to_do_list.cqrs.to_do_list.command.CreateListCommand;
 import com.to_do_list.cqrs.to_do_list.command.DeleteListCommand;
-import com.to_do_list.cqrs.to_do_list.dto.CreateListDto;
-import com.to_do_list.cqrs.to_do_list.dto.CreateListResponse;
-import com.to_do_list.cqrs.to_do_list.dto.GetAllListResponse;
-import com.to_do_list.cqrs.to_do_list.dto.GetListByIdResponse;
+import com.to_do_list.cqrs.to_do_list.command.UpdateListCommand;
+import com.to_do_list.cqrs.to_do_list.dto.*;
 import com.to_do_list.cqrs.to_do_list.query.GetListByIdQuery;
 import com.to_do_list.cqrs.to_do_list.query.GetListQuery;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,5 +50,11 @@ public class ToDoListController {
     public void deleteList(@PathVariable Integer id) {
        DeleteListCommand deleteListCommand = new DeleteListCommand(id);
        commandDispatcher.dispatch(deleteListCommand);
+   }
+
+   @PutMapping("/update/{id}")
+    public CreateListResponse updateList(@PathVariable Integer id, @RequestBody UpdateListDto updateListDto) {
+       UpdateListCommand updateListCommand = new UpdateListCommand(id,updateListDto);
+       return commandDispatcher.dispatch(updateListCommand);
    }
 }
