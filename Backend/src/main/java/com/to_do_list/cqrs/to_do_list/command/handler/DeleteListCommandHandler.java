@@ -14,8 +14,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class DeleteListCommandHandler implements CommandHandler<DeleteListCommand,Void> {
 
-    private ToDoListRepository toDoListRepository;
-    private AppUserService appUserService;
+    private final ToDoListRepository toDoListRepository;
+    private final AppUserService appUserService;
 
     @Autowired
     public DeleteListCommandHandler(ToDoListRepository toDoListRepository, AppUserService appUserService) {
