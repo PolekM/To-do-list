@@ -1,6 +1,5 @@
 package com.to_do_list.cqrs.task.command.handler;
 
-import com.to_do_list.cqrs.task.command.DeleteTaskCommand;
 import com.to_do_list.cqrs.task.command.UpdateTaskCommand;
 import com.to_do_list.cqrs.task.dto.CreateTaskResponse;
 import com.to_do_list.cqrs.task.dto.UpdateTaskDto;
@@ -26,7 +25,6 @@ import java.util.Optional;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThrows;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
@@ -43,7 +41,6 @@ class UpdateTaskCommandHandlerTest {
     private UpdateTaskCommandHandler updateTaskCommandHandler;
 
 
-
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
@@ -56,12 +53,12 @@ class UpdateTaskCommandHandlerTest {
         //when
 
         //then
-        assertThrows(TaskNotFoundException.class,()->updateTaskCommandHandler.handle(new UpdateTaskCommand(1,new UpdateTaskDto())));
+        assertThrows(TaskNotFoundException.class, () -> updateTaskCommandHandler.handle(new UpdateTaskCommand(1, new UpdateTaskDto())));
         verify(taskRepository).findById(any());
     }
 
     @Test
-    void UpdateTaskCommandHandler_ShouldThrowListNotFoundExceptionWhenListDoNotExist(){
+    void UpdateTaskCommandHandler_ShouldThrowListNotFoundExceptionWhenListDoNotExist() {
         //given
         Task task = preparedTask();
         given(taskRepository.findById(any())).willReturn(Optional.of(task));
@@ -69,50 +66,57 @@ class UpdateTaskCommandHandlerTest {
         //when
 
         //then
-        assertThrows(ToDoListNotFoundException.class,()->updateTaskCommandHandler.handle(new UpdateTaskCommand(1,new UpdateTaskDto())));
+        assertThrows(ToDoListNotFoundException.class, () -> updateTaskCommandHandler.handle(new UpdateTaskCommand(1, new UpdateTaskDto())));
         verify(taskRepository).findById(any());
         verify(toDoListRepository).findById(any());
     }
 
     @Test
-    void UpdateTaskCommandHandler_ShouldUpdateTask(){
+    void UpdateTaskCommandHandler_ShouldUpdateTask() {
         //given
         Task task = preparedTask();
         ToDoList toDoList = preparedList();
         AppUser appUser = toDoList.getAppUser();
+
         given(taskRepository.findById(any())).willReturn(Optional.of(task));
         given(toDoListRepository.findById(any())).willReturn(Optional.of(toDoList));
         given(appUserService.getCurrentUser()).willReturn(appUser);
+        given(taskRepository.save(any())).willReturn(task);
+
         UpdateTaskDto updateTaskDto = new UpdateTaskDto();
         updateTaskDto.setDescription("new description");
         updateTaskDto.setIsCompleted(true);
+
         //when
         CreateTaskResponse handle = updateTaskCommandHandler.handle(new UpdateTaskCommand(1, updateTaskDto));
+
         //then
         verify(taskRepository).findById(any());
         verify(appUserService).getCurrentUser();
-        verify(taskRepository).findById(any());
         verify(taskRepository).save(any());
-        assertThat(handle.getDescription(),is("new description"));
-        assertThat(handle.getIsCompleted(),is(true));
+        
+        assertThat(handle.getDescription(), is("new description"));
+        assertThat(handle.getIsCompleted(), is(true));
 
     }
-    public ToDoList preparedList(){
+
+    public ToDoList preparedList() {
         CreateListDto createListDto = new CreateListDto();
         createListDto.setName("test");
         CreateListCommand command = new CreateListCommand(createListDto);
         AppUser appUser = preparedUser();
-        return new ToDoList(command,appUser);
+        return new ToDoList(command, appUser);
     }
 
-    public Task preparedTask(){
+    public Task preparedTask() {
         Task task = new Task();
         task.setId(1);
         task.setDescription("test");
         task.setList(preparedList());
         return task;
     }
-    public AppUser preparedUser(){
+
+    public AppUser preparedUser() {
         return new AppUser("test@test.pl", "test", new AppRole());
     }
 }
