@@ -1,0 +1,14 @@
+form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.error{
+    color: red;
+    text-align: center;
+}
+label{
+    width: 100px;
+    display: inline-block;
+}

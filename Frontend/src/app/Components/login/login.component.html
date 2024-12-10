@@ -1,0 +1,28 @@
+<div class="container">
+
+
+    <form [formGroup] ="loginForm">
+        <p>
+            <label>email: </label>
+            <input id="email" type="text" pInputText formControlName="email" />
+            @if(loginForm.controls.email.invalid && (loginForm.controls.email.touched || loginForm.controls.email.dirty)){
+                @if(loginForm.controls.email.errors?.["required"]){
+                    <div class="error"><small>*email is required</small></div>
+                }
+                @if(loginForm.controls.email.errors?.["email"]){
+                    <div class="error"><small>*email is invalid</small></div>
+                }
+            }
+        </p>
+        <p>
+            <label>passowrd: </label>
+            <input id="passowrd" type="password" pInputText formControlName="passowrd" />
+            @if(loginForm.controls.passowrd.invalid && (loginForm.controls.passowrd.touched || loginForm.controls.passowrd.dirty)){
+                @if(loginForm.controls.passowrd.errors?.["required"]){
+                    <div class="error"><small>*password is required</small></div>
+                }
+            }
+        </p>
+        <p-button label="Log In"/>
+    </form>
+</div>
