@@ -3,10 +3,24 @@
         <p-menubar [model]="items">
             <ng-template pTemplate="items" let-item >
                 <ng-container>
+                    @if((item.label == "Login" || item.label == "Register") && token=='' ){
                     <a [routerLink]="item.route" class="p-menuitem-link" >
                         <span [class]="item.icon"></span>
                         <span class="ml-1">{{ item.label }}</span>
                     </a>
+                }
+                @if(item.label == "Logout" && token!=''){
+                    <a [routerLink]="item.route" class="p-menuitem-link">
+                        <span [class]="item.icon"></span>
+                        <span class="ml-1">{{ item.label }}</span>
+                    </a>
+                    }
+                @if(item.label != "Login" && item.label != "Register" && item.label != "Logout" ){
+                    <a [routerLink]="item.route" class="p-menuitem-link" >
+                        <span [class]="item.icon"></span>
+                        <span class="ml-1">{{ item.label }}</span>
+                    </a>
+                }
                 </ng-container>
             </ng-template>
         </p-menubar>

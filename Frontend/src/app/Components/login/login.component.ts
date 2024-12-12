@@ -8,6 +8,7 @@ import { AuthenticationService } from '../../Services/authentication.service';
 import { LoginDto } from '../../models/authentication/LoginDto';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -25,12 +26,14 @@ export class LoginComponent {
 
  
 
-  constructor(private formBuilder: FormBuilder,private authenticationService: AuthenticationService){
+  constructor(private formBuilder: FormBuilder,private authenticationService: AuthenticationService, private router: Router){
     
   }
 
   public authenticate(){
     const loginDto: LoginDto = {email:this.loginForm.value.email || '', password:this.loginForm.value.passowrd || ''};
-    this.authenticationService.authenticate(loginDto).subscribe(response => {this.authenticationService.storageTokenToLocalStorage(response.token)})
+    this.authenticationService.authenticate(loginDto).subscribe(response => {this.authenticationService.storageTokenToLocalStorage(response.token); this.router.navigate(['/list'])})
   }
+
+ 
 }

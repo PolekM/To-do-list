@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { MenubarModule } from 'primeng/menubar';
+import { AuthenticationService } from '../../Services/authentication.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-navbar',
   standalone: true,
@@ -9,6 +11,11 @@ import { MenubarModule } from 'primeng/menubar';
   styleUrl: './navbar.component.css'
 })
 export class NavbarComponent implements OnInit {
+
+  token: String = ''
+
+
+  constructor(private authenticationService: AuthenticationService,private router: Router){}
 
   items: MenuItem[] | undefined;
 
@@ -25,16 +32,31 @@ export class NavbarComponent implements OnInit {
           route: '/list'
       },
       {
-          label: 'Log in',
+          label: 'Login',
           icon: 'pi pi-sign-in',
           route: '/login'
       },
       {
-        label: 'register',
+        label: 'Register',
         icon: 'pi pi-sign-out',
         route: '/register'
     },
+    {
+      label: 'Logout',
+      icon: 'pi pi-sign-out',
+      route: '/login',
+      command: () => this.logout()
+    }
   
   ]
+  this.token = this.getToken()
+  this.authenticationService.token$.subscribe(token => this.token = token)
+  }
+  public getToken(){
+    return this.authenticationService.getToken();
+  }
+
+  public logout(){
+    this.authenticationService.removeLocalStorageToken();
   }
 }
