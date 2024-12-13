@@ -24,7 +24,7 @@ export class NavbarComponent implements OnInit {
       {
           label: 'Home',
           icon: 'pi pi-home',
-          route: '/list'
+          route: '/home'
       },
       {
           label: 'List',
