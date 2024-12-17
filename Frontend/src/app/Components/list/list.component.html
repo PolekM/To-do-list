@@ -1,1 +1,22 @@
-<p>list works!</p>
+ <div class="container flex justify-content-center">
+    <div class="flex flex-wrap justify-content-center gap-6 " style="max-width: 1000px;">
+                @for(list of listResponse; track list){
+                    <div class="flex" >
+                        <p-card [style]="{ width: '15rem'}">
+                            <ng-template pTemplate="header">
+                                <img alt="Card" class="w-full" src="https://primefaces.org/cdn/primeng/images/card-ng.jpg" />
+                            </ng-template>
+                            <ng-template pTemplate="title"> {{list.name}}</ng-template>
+                            <ng-template pTemplate="footer">
+                                <div class="flex gap-4 mt-1">
+                                    <p-button label="details" class="w-full" styleClass="w-full" />
+                                </div>
+                            </ng-template>
+                        </p-card>
+                    </div>
+                    }
+                    @empty {
+                        <p > no lists available - create a new one </p>
+                    }
+    </div>
+</div>

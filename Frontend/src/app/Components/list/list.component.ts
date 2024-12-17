@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { getAllListReposne } from '../../models/list/getAllListReposne';
 import { ListService } from '../../Services/list.service';
-
+import { Card, CardModule } from 'primeng/card';
+import { ButtonModule } from 'primeng/button';
 @Component({
   selector: 'app-list',
   standalone: true,
-  imports: [],
+  imports: [CardModule,ButtonModule],
   templateUrl: './list.component.html',
   styleUrl: './list.component.css'
 })
