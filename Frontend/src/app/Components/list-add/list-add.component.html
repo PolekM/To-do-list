@@ -1,0 +1,14 @@
+<div class="flex"style="margin-bottom:10px">
+    <p-button (click)="showDialog()" label="Create List" />
+    <p-dialog header="Create List" [modal]="true" [(visible)]="visible" [style]="{ width: '25rem' }">
+        <div class="flex items-center gap-4 mb-4 align-items-center" >
+            <label for="listName" class="font-semibold w-24">List Name</label>
+            <input pInputText id="username" class="flex-auto" autocomplete="off" [(ngModel)]="createListDto.name"/>
+        </div>
+        <div class="flex justify-end gap-2">
+            <p-button label="Cancel" severity="secondary" (click)="visible = false" />
+            <p-button label="Save" (click)="createList()" />
+        </div>
+    </p-dialog>
+</div>
+<p-toast position="top-right"></p-toast> 

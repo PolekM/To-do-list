@@ -1,7 +1,8 @@
- <div class="container flex justify-content-center">
+
+ <div class="container flex flex-column align-items-center">
+    <div class="flex"style="margin-bottom:10px"><app-list-add></app-list-add></div>
     <div class="flex flex-wrap justify-content-center gap-6 " style="max-width: 1000px;">
                 @for(list of listResponse; track list){
-                    <div class="flex" >
                         <p-card [style]="{ width: '15rem'}">
                             <ng-template pTemplate="header">
                                 <img alt="Card" class="w-full" src="https://primefaces.org/cdn/primeng/images/card-ng.jpg" />
@@ -13,7 +14,7 @@
                                 </div>
                             </ng-template>
                         </p-card>
-                    </div>
+                    
                     }
                     @empty {
                         <p > no lists available - create a new one </p>

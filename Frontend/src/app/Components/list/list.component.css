@@ -3,3 +3,7 @@ p{
 
     text-align: center;
 }
+::ng-deep .p-card-header {
+    padding: 1rem; /* Ustawienie odpowiedniego paddingu */
+    margin: 0; /* Zmniejszenie marginesu */
+}
