@@ -27,7 +27,7 @@ public class CreateListCommandHandler implements CommandHandler<CreateListComman
     @Transactional
     @Override
     public CreateListResponse handle(CreateListCommand command) {
-        if (command.getCreateListDto().getName() == null) {
+        if (command.getCreateListDto().getName() == null || command.getCreateListDto().getName().isEmpty()) {
             throw new CreateListIllegalArgumentException("Name cannot be null");
         }
 
