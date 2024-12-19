@@ -1,6 +1,6 @@
 
  <div class="container flex flex-column align-items-center">
-    <div class="flex"style="margin-bottom:10px"><app-list-add></app-list-add></div>
+    <div class="flex"style="margin-bottom:10px"><app-list-add (listCreated)="listChangeEmit()"></app-list-add></div>
     <div class="flex flex-wrap justify-content-center gap-6 " style="max-width: 1000px;">
                 @for(list of listResponse; track list){
                         <p-card [style]="{ width: '15rem'}">
