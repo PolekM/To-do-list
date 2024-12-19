@@ -3,6 +3,7 @@ package com.to_do_list.cqrs.user.command.handler;
 import com.to_do_list.cqrs.common.CommandHandler;
 import com.to_do_list.cqrs.user.command.RegisterCommand;
 import com.to_do_list.entity.AppUser;
+import com.to_do_list.exception.user.WrongCredentialException;
 import com.to_do_list.repository.AppRoleRepository;
 import com.to_do_list.repository.AppUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,9 @@ public class RegisterCommandHandler implements CommandHandler<RegisterCommand,St
 
     @Override
     public String handle(RegisterCommand command) {
+        if(!command.getRegisterDto().getPassword().equals(command.getRegisterDto().getRepeatPassword())){
+            throw new WrongCredentialException("password does not match");
+        }
         AppUser appUser = new AppUser(
                 command.getRegisterDto().getEmail(),
                 passwordEncoder.encode(command.getRegisterDto().getPassword()),
