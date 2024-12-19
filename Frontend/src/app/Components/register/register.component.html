@@ -1,1 +1,40 @@
-<p>register works!</p>
+<div class ="grid justify-content-center">
+    <div class ="col-4">
+        <form [formGroup] ="registerForm">
+            <p>
+                <label>email: </label>
+                <input id="email" type="text" pInputText formControlName="email" />
+                @if(registerForm.controls.email.invalid && (registerForm.controls.email.touched || registerForm.controls.email.dirty)){
+                    @if(registerForm.controls.email.errors?.["required"]){
+                        <div class="error"><small>*email is required</small></div>
+                    }
+                    @if(registerForm.controls.email.errors?.["email"]){
+                        <div class="error"><small>*email is invalid</small></div>
+                    }
+                }
+            </p>
+            <p>
+                <label>Passowrd: </label>
+                <input id="password" type="password" pInputText formControlName="password"/>
+                @if(registerForm.controls.password.invalid && (registerForm.controls.password.touched || registerForm.controls.password.dirty)){
+                    @if(registerForm.controls.password.errors?.["required"]){
+                        <div class="error"><small>*password is required</small></div>
+                    }
+                }
+            </p>
+            <p> 
+                <label>Password: </label>
+                <input id="repeatPassword" type="password" pInputText formControlName="repeatPassword"/>
+                @if(registerForm.controls.repeatPassword.invalid && (registerForm.controls.repeatPassword.touched || registerForm.controls.repeatPassword.dirty)){
+                    @if(registerForm.controls.repeatPassword.errors?.["required"]){
+                        <div class="error"><small>*repate password is required</small></div>
+                    }
+                    @if(registerForm.controls.repeatPassword.errors?.['passwordMismatch']){
+                        <div class="error"><small>*Passowrd do not Match</small></div>
+                    }
+                }
+            </p>
+            <p-button label="Log In" (onClick)="register()"/>
+        </form>
+    </div>
+</div>

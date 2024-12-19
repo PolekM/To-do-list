@@ -15,9 +15,9 @@
             </p>
             <p>
                 <label>passowrd: </label>
-                <input id="passowrd" type="password" pInputText formControlName="passowrd"/>
-                @if(loginForm.controls.passowrd.invalid && (loginForm.controls.passowrd.touched || loginForm.controls.passowrd.dirty)){
-                    @if(loginForm.controls.passowrd.errors?.["required"]){
+                <input id="password" type="password" pInputText formControlName="password"/>
+                @if(loginForm.controls.password.invalid && (loginForm.controls.password.touched || loginForm.controls.password.dirty)){
+                    @if(loginForm.controls.password.errors?.["required"]){
                         <div class="error"><small>*password is required</small></div>
                     }
                 }

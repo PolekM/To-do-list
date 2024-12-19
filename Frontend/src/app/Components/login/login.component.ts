@@ -21,7 +21,7 @@ export class LoginComponent {
 
   loginForm = this.formBuilder.group({
     email: ['',[Validators.required,Validators.email]],
-    passowrd: ['', Validators.required]
+    password: ['', Validators.required]
   })
 
  
@@ -31,7 +31,7 @@ export class LoginComponent {
   }
 
   public authenticate(){
-    const loginDto: LoginDto = {email:this.loginForm.value.email || '', password:this.loginForm.value.passowrd || ''};
+    const loginDto: LoginDto = {email:this.loginForm.value.email || '', password:this.loginForm.value.password || ''};
     this.authenticationService.authenticate(loginDto).subscribe(response => {this.authenticationService.storageTokenToLocalStorage(response.token); this.router.navigate(['/list'])})
   }
 
