@@ -37,7 +37,7 @@ export class RegisterComponent {
     this.authenticationService.register(registerDto).subscribe(
       {next: response =>
         {
-          this.messageService.add({severity: 'success', summary: 'Success', detail: `${response}`})
+          this.messageService.add({severity: 'success', summary: 'Success', detail: `${response.registerResponse}`})
           this.registerForm.reset()
         },
       error: err =>{ 

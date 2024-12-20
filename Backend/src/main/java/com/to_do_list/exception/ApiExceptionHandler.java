@@ -3,6 +3,7 @@ package com.to_do_list.exception;
 import com.to_do_list.exception.List.CreateListIllegalArgumentException;
 import com.to_do_list.exception.List.ToDoListNotFoundException;
 import com.to_do_list.exception.Task.TaskNotFoundException;
+import com.to_do_list.exception.user.EmailIsBusyException;
 import com.to_do_list.exception.user.WrongCredentialException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -37,6 +38,11 @@ public class ApiExceptionHandler {
     @ExceptionHandler({WrongCredentialException.class})
     public ResponseEntity<Error> handleUnauthorizedException(Exception exception) {
         return responseEntityExceptionBuilder(HttpStatus.UNAUTHORIZED, exception.getMessage());
+    }
+
+    @ExceptionHandler({EmailIsBusyException.class})
+    public ResponseEntity<Error> handleDuplicateException(Exception exception) {
+        return responseEntityExceptionBuilder(HttpStatus.CONFLICT, exception.getMessage());
     }
 
 }

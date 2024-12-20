@@ -7,7 +7,9 @@ import com.to_do_list.cqrs.user.command.RegisterCommand;
 import com.to_do_list.cqrs.user.dto.LoginDto;
 import com.to_do_list.cqrs.user.dto.LoginResponse;
 import com.to_do_list.cqrs.user.dto.RegisterDto;
+import com.to_do_list.cqrs.user.dto.RegisterResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RequestMapping(("/auth"))
@@ -27,7 +29,7 @@ public class AuthenticationController {
 
 
     @PostMapping("/register")
-    public String register(@RequestBody RegisterDto registerDto){
+    public RegisterResponse register(@RequestBody RegisterDto registerDto){
         RegisterCommand registerCommand = new RegisterCommand(registerDto);
         return commandDispatcher.dispatch(registerCommand);
     }
