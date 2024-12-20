@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { LoginReponse } from '../models/authentication/LoginResponse';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, catchError, Observable, throwError } from 'rxjs';
 import { LoginDto } from '../models/authentication/LoginDto';
+import { RegisterDto } from '../models/authentication/RegisterDto';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +19,11 @@ export class AuthenticationService {
   
   public authenticate(loginDto: LoginDto):Observable<LoginReponse>{
     return this.http.post<LoginReponse>(`${this.loginBaseUrl}/login`,loginDto)
+  }
+  
+  public register(registerDto: RegisterDto):Observable<String>{
+    return this.http.post<String>(`${this.loginBaseUrl}/register`,registerDto,{ responseType: 'text' as 'json' }).pipe(
+      catchError (error => {return throwError(() => new Error(error.error?.message))} ))
   }
 
   public storageTokenToLocalStorage(token:String){
