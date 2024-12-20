@@ -27,8 +27,8 @@ export class RegisterComponent {
   }
   passwordMatchValidator(form: AbstractControl):ValidationErrors | null{
     const password = form.parent?.get('password')?.value;
-    const repeatPassword = form.get('repeatPassword')?.value;
-    
+    const repeatPassword = form.parent?.get('repeatPassword')?.value;
+    console.log(password+" "+repeatPassword)
     return password === repeatPassword ? null : { passwordMismatch: true };
   }
 }

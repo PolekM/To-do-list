@@ -34,7 +34,9 @@
                     }
                 }
             </p>
-            <p-button label="Log In" (onClick)="register()"/>
+                <p-button label="register" (onClick)="register()" [disabled]="!registerForm.valid"/>
+            
+            
         </form>
     </div>
 </div>
