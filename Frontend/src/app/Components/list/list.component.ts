@@ -8,16 +8,20 @@ import { Subscription } from 'rxjs';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { CreateListResponse } from '../../models/list/CreateListResponse';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { InputTextModule } from 'primeng/inputtext';
 @Component({
   selector: 'app-list',
   standalone: true,
-  imports: [CardModule, ButtonModule, ListAddComponent,ToastModule],
+  imports: [CardModule, ButtonModule, ListAddComponent,ToastModule, FormsModule,InputTextModule],
   templateUrl: './list.component.html',
   styleUrl: './list.component.css'
 })
 export class ListComponent implements OnInit,OnDestroy{
 
   listResponse: getAllListReposne[] = []
+  editedList: number | null = null
   private subscription: Subscription = {} as Subscription;
   constructor(private listService: ListService, private messageService: MessageService){
   }
@@ -46,9 +50,14 @@ export class ListComponent implements OnInit,OnDestroy{
     )
 
     }
-    
-    
-  
+    public cancelEdit(){
+      this.editedList = null;
+      
+    }
+
+    public enableEdit(id:number){
+      this.editedList = id
+    }
 
   listChangeEmit(){
     this.getUserList()
