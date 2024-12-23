@@ -21,4 +21,14 @@ export class ListService {
     return this.http.post<CreateListResponse>(`${this.listBaseUrl}/create`,createListDto).pipe(
       catchError( error =>{return throwError(()=> new Error(error.error?.message))}))
   }
+
+  public deleteList(listId: number):Observable<void>{
+    return this.http.delete<void>(`${this.listBaseUrl}/delete/${listId}`).pipe(
+      catchError(
+        error => {
+          return throwError(() => new Error(error.error?.message))
+        }
+      )
+    )
+  }
 }

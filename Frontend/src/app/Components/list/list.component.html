@@ -5,9 +5,12 @@
                 @for(list of listResponse; track list){
                         <p-card [style]="{ width: '15rem'}">
                             <ng-template pTemplate="header">
+                                <i class="pi pi-times" style="font-size: 1rem; width: 100%; text-align: right;" (click)="deleteList(list)"></i>
                                 <img alt="Card" class="w-full" src="https://primefaces.org/cdn/primeng/images/card-ng.jpg" />
                             </ng-template>
-                            <ng-template pTemplate="title"> {{list.name}}</ng-template>
+                            <ng-template pTemplate="title"> {{list.name}}
+                                <i class="pi pi-pencil" style="font-size: 1rem"></i>
+                            </ng-template>
                             <ng-template pTemplate="footer">
                                 <div class="flex gap-4 mt-1">
                                     <p-button label="details" class="w-full" styleClass="w-full" />
@@ -21,3 +24,4 @@
                     }
     </div>
 </div>
+<p-toast position="top-right"></p-toast> 
