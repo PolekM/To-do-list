@@ -9,13 +9,14 @@
                                 <img alt="Card" class="w-full" src="https://primefaces.org/cdn/primeng/images/card-ng.jpg" />
                             </ng-template>
                             <ng-template pTemplate="title"> 
-                                @if(editedList !== list.id){
+                                @if(editedListId !== list.id){
                                     {{list.name}}
-                                    <i class="pi pi-pencil" style="font-size: 1rem" (click)="enableEdit(list.id)"></i>
+                                    <i class="pi pi-pencil" style="font-size: 1rem" (click)="enableEdit(list)"></i>
                                 }
                                 @else{
-                                    <input type="text" [style]="{width: '10rem'}"pInputText [(ngModel)]="list.name" />
-                                    <i class="pi pi-check" style="font-size: 1.5rem" (click)="cancelEdit()"></i>   
+                                    <input type="text" [style]="{width: '10rem'}"pInputText [(ngModel)]="editedListName.name" />
+                                    <i class="pi pi-check" style="font-size: 1rem" (click)="updateListName()"></i>   
+                                    <i class="pi pi-times" style="font-size: 1rem;" (click)="cancelEdit(list)"></i>
                                 }
                             </ng-template>
                             

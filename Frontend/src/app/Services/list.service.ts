@@ -4,6 +4,7 @@ import { catchError, Observable, throwError } from 'rxjs';
 import { getAllListReposne } from '../models/list/getAllListReposne';
 import { CreateListResponse } from '../models/list/CreateListResponse';
 import { CreateListDto } from '../models/list/CreateListDto';
+import { UpdateListDto } from '../models/list/UpdateListDto';
 
 @Injectable({
   providedIn: 'root'
@@ -27,6 +28,16 @@ export class ListService {
       catchError(
         error => {
           return throwError(() => new Error(error.error?.message))
+        }
+      )
+    )
+  }
+
+  public updateListName(updateListDto: UpdateListDto,id:number):Observable<CreateListResponse>{
+    return this.http.put<CreateListResponse>(`${this.listBaseUrl}/update/${id}`,updateListDto).pipe(
+        catchError(
+          error =>{
+          return  throwError( () => new Error(error.error?.message))
         }
       )
     )

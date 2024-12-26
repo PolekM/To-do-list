@@ -11,6 +11,7 @@ import { CreateListResponse } from '../../models/list/CreateListResponse';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
+import { UpdateListDto } from '../../models/list/UpdateListDto';
 @Component({
   selector: 'app-list',
   standalone: true,
@@ -21,7 +22,9 @@ import { InputTextModule } from 'primeng/inputtext';
 export class ListComponent implements OnInit,OnDestroy{
 
   listResponse: getAllListReposne[] = []
-  editedList: number | null = null
+  editedListId: number | null = null
+  prevListName: string = ''
+  editedListName: UpdateListDto = {} as UpdateListDto
   private subscription: Subscription = {} as Subscription;
   constructor(private listService: ListService, private messageService: MessageService){
   }
@@ -48,15 +51,40 @@ export class ListComponent implements OnInit,OnDestroy{
         this.messageService.add({severity:'error', summary:'Error',detail:error.message})
       }
     )
-
     }
-    public cancelEdit(){
-      this.editedList = null;
+    public updateListName(){
+      if(this.editedListId!=null){
+        this.listService.updateListName(this.editedListName,this.editedListId).subscribe(
+          {next: response => {
+            const index = this.listResponse.findIndex(list => list.id === this.editedListId);
+          if (index !== -1) {
+            this.listResponse[index].name = response.name;
+           }
+            this.messageService.add({severity: 'success', summary: 'Success', detail: `Your List:${response.name} has Been Edited`})
+            this.editedListId = null;
+          },
+          error: error =>{
+            this.messageService.add({severity:'error', summary:'Error',detail:error.message})
+            this.editedListId = null;
+          }
+
+        }
+      )
+    }
       
     }
 
-    public enableEdit(id:number){
-      this.editedList = id
+    public cancelEdit(list: CreateListResponse){
+      this.editedListId = null;
+      list.name = this.prevListName
+      
+    }
+
+    public enableEdit(list:CreateListResponse){
+      this.editedListId = list.id;
+      this.prevListName = list.name
+      this.editedListName.name = list.name
+  
     }
 
   listChangeEmit(){
