@@ -5,6 +5,7 @@ import { getAllListReposne } from '../models/list/getAllListReposne';
 import { CreateListResponse } from '../models/list/CreateListResponse';
 import { CreateListDto } from '../models/list/CreateListDto';
 import { UpdateListDto } from '../models/list/UpdateListDto';
+import { GetListByIdResponse } from '../models/list/GetListByIdResponse';
 
 @Injectable({
   providedIn: 'root'
@@ -38,6 +39,15 @@ export class ListService {
         catchError(
           error =>{
           return  throwError( () => new Error(error.error?.message))
+        }
+      )
+    )
+  }
+  public getListById(idList:number): Observable<GetListByIdResponse>{
+    return this.http.get<GetListByIdResponse>(`${this.listBaseUrl}/${idList}`).pipe(
+      catchError(
+        error =>{
+          return throwError(() => error)
         }
       )
     )

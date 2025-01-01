@@ -1,20 +1,41 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ListService } from '../../Services/list.service';
+import { GetListByIdResponse } from '../../models/list/GetListByIdResponse';
+import { MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
 
 @Component({
   selector: 'app-list-details',
   standalone: true,
-  imports: [],
+  imports: [ToastModule],
   templateUrl: './list-details.component.html',
   styleUrl: './list-details.component.css'
 })
 export class ListDetailsComponent implements OnInit {
 
-  id: number = 0
-  constructor(private router: ActivatedRoute){
+  currentListId: number = 0
+  listDetails: GetListByIdResponse = {} as GetListByIdResponse
+  constructor(private activeRoute: ActivatedRoute,private router: Router,private listService: ListService,private messageService: MessageService){
 
   }
   ngOnInit(): void {
-    this.router.params.subscribe(params => {this.id = params['id']})
+    this.getListById()
+  }
+
+  public getListById(){
+    this.activeRoute.params.subscribe(params => {this.currentListId = params['id']})
+    this.listService.getListById(this.currentListId).subscribe({
+      next: response => {
+        this.listDetails = response
+      },
+      error: err => {
+        this.messageService.add({severity:'error', summary:'Error', detail: err.error.message})
+        if(err.status === 401){
+          this.router.navigate(['/login'])
+        }
+      }
+    })
+   
   }
 }
