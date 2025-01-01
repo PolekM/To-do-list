@@ -5,6 +5,7 @@ import { ListComponent } from './Components/list/list.component';
 import { HomeComponent } from './Components/home/home.component';
 import { loginRegisterAccessGuard } from './Guards/login-register-access.guard';
 import { authGuard } from './Guards/auth.guard';
+import { ListDetailsComponent } from './Components/list-details/list-details.component';
 
 export const routes: Routes = [
     {
@@ -21,5 +22,8 @@ export const routes: Routes = [
     },
     {
         path: "list", component:ListComponent, canActivate:[authGuard]
+    },
+    {
+        path:"list/:id", component:ListDetailsComponent, canActivate:[authGuard]
     }
 ];

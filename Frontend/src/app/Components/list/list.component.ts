@@ -12,6 +12,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 import { UpdateListDto } from '../../models/list/UpdateListDto';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-list',
   standalone: true,
@@ -26,7 +27,7 @@ export class ListComponent implements OnInit,OnDestroy{
   prevListName: string = ''
   editedListName: UpdateListDto = {} as UpdateListDto
   private subscription: Subscription = {} as Subscription;
-  constructor(private listService: ListService, private messageService: MessageService){
+  constructor(private listService: ListService, private messageService: MessageService,private router: Router){
   }
 
   
@@ -89,5 +90,9 @@ export class ListComponent implements OnInit,OnDestroy{
 
   listChangeEmit(){
     this.getUserList()
+  }
+
+  nagivateToDetails(id:number){
+    this.router.navigate(['/list',id])
   }
 }

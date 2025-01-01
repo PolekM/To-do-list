@@ -22,7 +22,7 @@
                             
                             <ng-template pTemplate="footer">
                                 <div class="flex gap-4 mt-1">
-                                    <p-button label="details" class="w-full" styleClass="w-full" />
+                                    <p-button label="details" class="w-full" styleClass="w-full" (click)="nagivateToDetails(list.id)"/>
                                 </div>
                             </ng-template>
                         </p-card>
