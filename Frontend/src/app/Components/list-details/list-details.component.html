@@ -1,23 +1,41 @@
 <div class="grid justify-content-center">
-    <div class="col-12 sm:col-12 md:col-12 lg:col-11 xl:col-9">
+    <div class="col-12 sm:col-12 md:col-12 lg:col-11 xl:col-9 text-center">
+      
         <p-table [autoLayout]="true" [value]="listDetails.tasks">
             <ng-template pTemplate="header">
                 <tr>
                     <th>Id</th>
                     <th>Description</th>
                     <th>IsComplited</th>
+                    <th></th>
                 </tr>
             </ng-template>
             <ng-template pTemplate="body" let-task>
+                @if(listDetails.tasks.length>0){
                 <tr >
                     <td>{{ task.id }}</td>
                     <td>{{ task.description }}</td>
                     <td>{{ task.isCompleted }}</td>
+                    <td><p-button (click)="deleteTask(task)" label="Delete" severity="warning"/></td>
                 </tr>
-            </ng-template>
+            }
+            @else {
+                <ng-template pTemplate="body" let-task>
+
+                </ng-template>
+            }
+            </ng-template> 
         </p-table>
     </div>
-        
+  
+</div>
+<div class="grid justify-content-center">
+    <div class="col-8 sm:col-8 md:col-6 lg:col-5 xl:col-5 text-right">
+       <input pInputText id="in_label" [(ngModel)]="createdTaskValue" autocomplete="off" /> 
+    </div>    
+    <div class="col-4 sm:col-4 md:col-4 lg:col-4 xl:col-4 text-left">
+       <p-button label="Create" />
+    </div>  
 </div>
 
     
