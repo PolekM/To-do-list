@@ -24,18 +24,18 @@ import { TaskQueryResponse } from '../../models/Task/TaskQueryResponse';
 export class ListDetailsComponent implements OnInit {
 
   currentListId: number = 0
-  listDetails: GetListByIdResponse = {id: 0, name: '', tasks: []}
+  listDetails: GetListByIdResponse = {} as GetListByIdResponse
   createdTaskValue: string =""
   constructor(private activeRoute: ActivatedRoute,private router: Router,private listService: ListService,private messageService: MessageService,private taskService:TaskService ){
 
   }
   ngOnInit(): void {
+    this.activeRoute.params.subscribe(params => {this.currentListId = params['id']})
     this.getListById()
   }
 
   public getListById(){
-
-    this.activeRoute.params.subscribe(params => {this.currentListId = params['id']})
+  
     this.listService.getListById(this.currentListId).subscribe({
       next: response => {
         this.listDetails = response
@@ -60,4 +60,16 @@ export class ListDetailsComponent implements OnInit {
       }
     )
   }
+  public createTask(){
+    this.taskService.createTask(this.currentListId,this.createdTaskValue).subscribe({
+      next: response =>{
+        this.listDetails.tasks.push({id:response.id,description:response.description,isCompleted:response.isCompleted})
+        this.messageService.add({severity: 'success', summary: 'Success', detail: `Your Task has been created`})
+      },
+      error: err =>{
+        this.messageService.add({severity:'error', summary:'Error',detail:err.message})
+      }
+    })
+  }
+
 }
