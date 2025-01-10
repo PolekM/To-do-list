@@ -4,18 +4,20 @@
         <p-table [autoLayout]="true" [value]="listDetails.tasks">
             <ng-template pTemplate="header">
                 <tr>
-                    <th>Id</th>
-                    <th>Description</th>
                     <th>IsComplited</th>
+                    <th>Description</th>
+                    
                     <th></th>
                 </tr>
             </ng-template>
             <ng-template pTemplate="body" let-task>
                 @if(listDetails.tasks.length>0){
                 <tr >
-                    <td>{{ task.id }}</td>
+                    <td>
+                        <p-checkbox [(ngModel)]="task.isCompleted" [binary]="true" />
+                    </td>
                     <td>{{ task.description }}</td>
-                    <td>{{ task.isCompleted }}</td>
+                    
                     <td><p-button (click)="deleteTask(task)" label="Delete" severity="warning"/></td>
                 </tr>
             }

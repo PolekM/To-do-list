@@ -12,12 +12,13 @@ import { FormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { TaskService } from '../../Services/task.service';
 import { TaskQueryResponse } from '../../models/Task/TaskQueryResponse';
+import { Checkbox, CheckboxModule } from 'primeng/checkbox';
 
 
 @Component({
   selector: 'app-list-details',
   standalone: true,
-  imports: [ToastModule,TableModule,CommonModule,InputTextModule,FormsModule,ButtonModule],
+  imports: [ToastModule,TableModule,CommonModule,InputTextModule,FormsModule,ButtonModule,CheckboxModule],
   templateUrl: './list-details.component.html',
   styleUrl: './list-details.component.css'
 })
@@ -39,6 +40,7 @@ export class ListDetailsComponent implements OnInit {
     this.listService.getListById(this.currentListId).subscribe({
       next: response => {
         this.listDetails = response
+        this.listDetails.tasks.sort((a, b) => Number(a.isCompleted) - Number(b.isCompleted));
       },
       error: err => {
         this.messageService.add({severity:'error', summary:'Error', detail: err.error.message})
