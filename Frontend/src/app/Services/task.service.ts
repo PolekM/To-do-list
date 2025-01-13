@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
 import { CreateTaskDto } from '../models/Task/CreateTaskDto';
 import { CreateTaskResponse } from '../models/Task/CreateTaskResponse';
+import { UpdateTaskDto } from '../models/Task/UpdateTaskDto';
 
 @Injectable({
   providedIn: 'root'
@@ -26,6 +27,17 @@ export class TaskService {
     return this.http.post<CreateTaskResponse>(`${this.taskBaseUrl}/add`,newTask).pipe(
       catchError(
         error =>{
+          return throwError(() => new Error(error.error?.message))
+        }
+      )
+    )
+  }
+
+  public updateTask(taskId:number,isCompleted?: boolean, description?:string):Observable<CreateTaskResponse>{
+    let updatedTask: UpdateTaskDto = {isCompleted,description}
+    return this.http.put<CreateTaskResponse>(`${this.taskBaseUrl}/update/${taskId}`,updatedTask).pipe(
+      catchError(
+        error => {
           return throwError(() => new Error(error.error?.message))
         }
       )

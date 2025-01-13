@@ -14,7 +14,7 @@
                 @if(listDetails.tasks.length>0){
                 <tr >
                     <td>
-                        <p-checkbox [(ngModel)]="task.isCompleted" [binary]="true" />
+                        <p-checkbox [(ngModel)]="task.isCompleted" [binary]="true" (click)="changeTaskStatus(task)"/>
                     </td>
                     <td>{{ task.description }}</td>
                     

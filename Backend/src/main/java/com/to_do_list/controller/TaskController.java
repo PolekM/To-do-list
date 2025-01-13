@@ -33,6 +33,7 @@ public class TaskController {
 
     @PutMapping("/update/{id}")
     public CreateTaskResponse updateTask(@PathVariable("id") Integer id, @RequestBody UpdateTaskDto updateTaskDto){
+        System.out.println(updateTaskDto.getIsCompleted());
         UpdateTaskCommand updateTaskCommand = new UpdateTaskCommand(id,updateTaskDto);
         return commandDispatcher.dispatch(updateTaskCommand);
     }

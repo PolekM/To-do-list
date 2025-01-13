@@ -65,10 +65,22 @@ export class ListDetailsComponent implements OnInit {
   public createTask(){
     this.taskService.createTask(this.currentListId,this.createdTaskValue).subscribe({
       next: response =>{
-        this.listDetails.tasks.push({id:response.id,description:response.description,isCompleted:response.isCompleted})
+        this.getListById()
         this.messageService.add({severity: 'success', summary: 'Success', detail: `Your Task has been created`})
       },
       error: err =>{
+        this.messageService.add({severity:'error', summary:'Error',detail:err.message})
+      }
+    })
+  }
+
+  public changeTaskStatus(task: TaskQueryResponse){
+    this.taskService.updateTask(task.id,task.isCompleted,undefined).subscribe({
+      next: response =>{
+        this.getListById()
+        this.messageService.add({severity: 'success', summary: 'Success', detail: `Your Task has been updated`})
+      },
+      error:err =>{
         this.messageService.add({severity:'error', summary:'Error',detail:err.message})
       }
     })
