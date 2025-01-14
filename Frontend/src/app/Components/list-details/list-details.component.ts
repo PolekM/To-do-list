@@ -27,6 +27,9 @@ export class ListDetailsComponent implements OnInit {
   currentListId: number = 0
   listDetails: GetListByIdResponse = {} as GetListByIdResponse
   createdTaskValue: string =""
+  editedTaskId: number | null = null
+  prevTaskName: string = ''
+  editedTask: TaskQueryResponse = {} as TaskQueryResponse
   constructor(private activeRoute: ActivatedRoute,private router: Router,private listService: ListService,private messageService: MessageService,private taskService:TaskService ){
 
   }
@@ -85,5 +88,27 @@ export class ListDetailsComponent implements OnInit {
       }
     })
   }
+  public changeTaskDescription(task: TaskQueryResponse){
+    this.taskService.updateTask(task.id,undefined,task.description).subscribe({
+      next: response =>{
+        this.getListById()
+        this.messageService.add({severity: 'success', summary: 'Success', detail: `Your Task has been updated`})
+        this.editedTaskId = null
+      },
+      error:err =>{
+        this.messageService.add({severity:'error', summary:'Error',detail:err.message})
+      }
+    })
+  }
 
+  public enableEdit(task: TaskQueryResponse){
+    this.editedTaskId = task.id
+    this.prevTaskName = task.description
+    this.editedTask.description = task.description 
+  }
+    public cancelEdit(task: TaskQueryResponse){
+        this.editedTaskId = null;
+        task.description = this.prevTaskName
+        
+      }
 }

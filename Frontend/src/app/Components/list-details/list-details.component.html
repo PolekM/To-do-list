@@ -16,7 +16,16 @@
                     <td>
                         <p-checkbox [(ngModel)]="task.isCompleted" [binary]="true" (click)="changeTaskStatus(task)"/>
                     </td>
-                    <td>{{ task.description }}</td>
+                    <td>
+                        @if(editedTaskId!==task.id){
+                        {{ task.description }} <i class="pi pi-pencil" style="font-size: 1rem" (click)="enableEdit(task)"></i>
+                    }
+                        @else{
+                            <input type="text" [style]="{width: '10rem'}"pInputText [(ngModel)]="task.description" />
+                            <i class="pi pi-check" style="font-size: 1rem" (click)="changeTaskDescription(task)"></i>   
+                            <i class="pi pi-times" style="font-size: 1rem;" (click)="cancelEdit(task)"></i>
+                        }
+                    </td>
                     
                     <td><p-button (click)="deleteTask(task)" label="Delete" severity="warning"/></td>
                 </tr>
