@@ -23,10 +23,10 @@ To-do-list is a web application that allows users to efficiently manage their da
 ---
 
 ## Technologies
-Frontend: Angular, PrimeNg
-Backend: Java, Spring Framework, Maven
-Database: H2 Database
-Authorization: JWT Authentication
+- Frontend: Angular, PrimeNg
+- Backend: Java, Spring Framework, Maven
+- Database: H2 Database
+- Authorization: JWT Authentication
 
 ## License
 This project is licensed under the MIT License. For more details, see the LICENSE file.
