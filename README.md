@@ -14,11 +14,11 @@ To-do-list is a web application that allows users to efficiently manage their da
 ---
 
 ## Features
-- **Add new tasks**: Create new entries on the task list.  
-- **Edit tasks**: Modify existing tasks.  
-- **Delete tasks**: Remove tasks from the list.  
-- **Mark tasks as completed**: Track progress by marking tasks as done.  
-- **JWT Authentication**: Secure session management for users.  
+- Add new tasks**: Create new entries on the task list.  
+- Edit tasks**: Modify existing tasks.  
+- Delete tasks**: Remove tasks from the list.  
+- Mark tasks as completed**: Track progress by marking tasks as done.  
+- JWT Authentication**: Secure session management for users.  
 
 ---
 
