@@ -1,15 +1,15 @@
 # To-do-list
 
+## Description
+To-do-list is a web application that allows users to efficiently manage their daily tasks. It provides functionality for adding, editing, deleting, and marking tasks as completed. The application leverages modern technologies and ensures security through JWT authentication.
+
+---
+
 ## Table of Contents
 - [Description](#description)
 - [Features](#features)
 - [Technologies](#technologies)
 - [License](#license)
-
----
-
-## Description
-To-do-list is a web application that allows users to efficiently manage their daily tasks. It provides functionality for adding, editing, deleting, and marking tasks as completed. The application leverages modern technologies and ensures security through JWT authentication.
 
 ---
 
