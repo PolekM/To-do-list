@@ -1,17 +1,15 @@
 # To-do-list
 
-## Description
-To-do-list is a web application that allows users to efficiently manage their daily tasks. It provides functionality for adding, editing, deleting, and marking tasks as completed. The application leverages modern technologies and ensures security through JWT authentication.
-
----
-
 ## Table of Contents
 - [Description](#description)
 - [Features](#features)
 - [Technologies](#technologies)
-- [Installation and Setup](#installation-and-setup)
-- [Usage Examples](#usage-examples)
 - [License](#license)
+
+---
+
+## Description
+To-do-list is a web application that allows users to efficiently manage their daily tasks. It provides functionality for adding, editing, deleting, and marking tasks as completed. The application leverages modern technologies and ensures security through JWT authentication.
 
 ---
 
@@ -29,3 +27,6 @@ Frontend: Angular, PrimeNg
 Backend: Java, Spring Framework, Maven
 Database: H2 Database
 Authorization: JWT Authentication
+
+## License
+This project is licensed under the MIT License. For more details, see the LICENSE file.
